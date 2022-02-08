@@ -7,6 +7,10 @@ defmodule ReportsGenerator do
     |> Enum.reduce(report_acc(), fn line, acc -> sum_values(line, acc) end)
   end
 
+  def fetch_higher_cost(report) do
+    Enum.max_by(report, fn {_key, value} -> value end)
+  end
+
   defp sum_values([id, _food_name, price], acc) do
     Map.put(acc, id, acc[id] + price)
   end
